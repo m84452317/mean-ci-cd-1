@@ -1,6 +1,6 @@
 <div style="text-align:center; padding: 20px;">
   <h2>Sign Up</h2>
-  <form (ngSubmit)="onSignUp()">
+  <form (ngSubmit)="onSignUp()" #signUpForm="ngForm">
     <div style="margin-bottom: 10px;">
       <label for="username">Username:</label>
       <input type="text" id="username" [(ngModel)]="username" name="username" required>

@@ -4,7 +4,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build -- --output-path=./dist/out --base-href=/
+# Pass API_URL at build time
+ARG API_URL
+RUN echo "export const environment = { production: true, apiUrl: '${API_URL}' };" \
+  > src/environments/environment.prod.ts
+RUN npm run build -- --output-path=./dist/out --base-href=/  --configuration production
 
 # We can use a lightweight server like Nginx for production,
 # but for simplicity, we'll use a simple http-server.
