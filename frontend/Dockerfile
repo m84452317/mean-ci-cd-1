@@ -12,5 +12,10 @@ FROM node:20-alpine
 WORKDIR /app
 COPY --from=build /app/dist/out ./
 RUN npm install -g http-server
-EXPOSE 4200
-CMD ["http-server", "-p", "4200", "./"]
+# EXPOSE 4200
+# CMD ["http-server", "-p", "4200", "./"]
+# Expose Render’s dynamic port (not hardcoded)
+EXPOSE 8080
+
+# Use $PORT instead of 4200
+CMD ["sh", "-c", "http-server ./dist/out -p $PORT"]
