@@ -14,14 +14,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Backend Service
-        uses: render-action/deploy-web-service@v1.2.0
+        uses: Render-action/deploy-web-service@v1.2.0
         with:
           service-id: ${{ secrets.RENDER_BACKEND_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
           dir: backend/
 
       - name: Deploy Frontend Service
-        uses: render-action/deploy-web-service@v1.2.0
+        uses: Render-action/deploy-web-service@v1.2.0
         with:
           service-id: ${{ secrets.RENDER_FRONTEND_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
