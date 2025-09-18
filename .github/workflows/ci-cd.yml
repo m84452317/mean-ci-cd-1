@@ -10,20 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
+      # Deploys the backend
       - name: Deploy Backend Service
-        uses: JorgeLNJunior/render-deploy@v1.4.5
-        with:
-          service_id: ${{ secrets.RENDER_BACKEND_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-        #   dir: backend/
+        run: curl ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
 
+      # Deploys the frontend, passing the API_URL as a build argument
       - name: Deploy Frontend Service
-        uses: JorgeLNJunior/render-deploy@v1.4.5
-        with:
-          service_id: ${{ secrets.RENDER_FRONTEND_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-        #   dir: frontend/
-        #   build_arg: API_URL=${{ secrets.RENDER_BACKEND_URL }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{ "buildArgs": { "API_URL": "${{ secrets.RENDER_BACKEND_URL }}" } }' \
+            ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
