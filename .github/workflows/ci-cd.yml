@@ -18,12 +18,12 @@ jobs:
         with:
           service_id: ${{ secrets.RENDER_BACKEND_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
-          dir: backend/
+        #   dir: backend/
 
       - name: Deploy Frontend Service
         uses: JorgeLNJunior/render-deploy@v1.4.5
         with:
           service_id: ${{ secrets.RENDER_FRONTEND_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
-          dir: frontend/
-          build_arg: API_URL=${{ secrets.RENDER_BACKEND_URL }}
+        #   dir: frontend/
+        #   build_arg: API_URL=${{ secrets.RENDER_BACKEND_URL }}
