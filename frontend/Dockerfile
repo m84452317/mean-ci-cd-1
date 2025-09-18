@@ -10,7 +10,8 @@ RUN npm run build -- --output-path=./dist/out --base-href=/
 # but for simplicity, we'll use a simple http-server.
 FROM node:20-alpine
 WORKDIR /app
-COPY --from=build /app/dist/out ./
+# COPY --from=build /app/dist/out ./
+COPY --from=build /app/dist/out/browser ./dist/out
 RUN npm install -g http-server
 # EXPOSE 4200
 # CMD ["http-server", "-p", "4200", "./"]
@@ -18,4 +19,5 @@ RUN npm install -g http-server
 EXPOSE 8080
 
 # Use $PORT instead of 4200
-CMD ["sh", "-c", "http-server ./dist/out -p $PORT"]
+# CMD ["sh", "-c", "http-server ./dist/out -p $PORT"]
+CMD ["sh", "-c", "http-server ./dist/out -p $PORT -P http://127.0.0.1:$PORT?"]
