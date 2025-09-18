@@ -14,16 +14,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Backend Service
-        uses: Render-action/deploy-web-service@v1.2.0
+        uses: JorgeLNJunior/render-deploy@v1.4.5
         with:
-          service-id: ${{ secrets.RENDER_BACKEND_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+          service_id: ${{ secrets.RENDER_BACKEND_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
           dir: backend/
 
       - name: Deploy Frontend Service
-        uses: Render-action/deploy-web-service@v1.2.0
+        uses: JorgeLNJunior/render-deploy@v1.4.5
         with:
-          service-id: ${{ secrets.RENDER_FRONTEND_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+          service_id: ${{ secrets.RENDER_FRONTEND_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
           dir: frontend/
-          build-arg: API_URL=${{ secrets.RENDER_BACKEND_URL }}
+          build_arg: API_URL=${{ secrets.RENDER_BACKEND_URL }}
