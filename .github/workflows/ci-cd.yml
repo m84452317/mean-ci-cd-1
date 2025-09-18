@@ -10,14 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Deploys the backend
       - name: Deploy Backend Service
-        run: curl ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
+        run: curl -v ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
 
-      # Deploys the frontend, passing the API_URL as a build argument
       - name: Deploy Frontend Service
         run: |
-          curl -X POST \
+          curl -v -X POST \
             -H "Content-Type: application/json" \
             -d '{ "buildArgs": { "API_URL": "${{ secrets.RENDER_BACKEND_URL }}" } }' \
             ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
