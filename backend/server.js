@@ -12,7 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 const authRouter = require('./routes/auth');
+const productsRouter = require('./routes/products');
 app.use('/auth', authRouter)
+app.use('/products', productsRouter);
 
 // Connect to MongoDB
 // Note: We'll use a local database for now, and a Render-managed one later.
