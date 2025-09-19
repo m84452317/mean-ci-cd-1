@@ -3,37 +3,38 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.prod'; 
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-signup',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  selector: 'app-login',
+  imports: [FormsModule,CommonModule,RouterModule],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class SignupComponent {
+export class LoginComponent {
   username = '';
   password = '';
   message = '';
-
-  // Use the API URL from the environment configuration
+   // Use the API URL from the environment configuration
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  onSignUp() {
-    this.http.post(`${this.apiUrl}/auth/signup`, {
+    onLogin() {
+    this.http.post(`${this.apiUrl}/auth/login`, {
       username: this.username,
       password: this.password
     }).subscribe({
       next: (res: any) => {
-        this.message = 'Sign up successful!';
+        this.message = 'Login successful!';
         console.log(res);
+        // this.router.navigate(['/']); // Redirect to home 
       },
       error: (err: any) => {
-        this.message = 'Sign up failed.';
+        this.message = 'Login failed.';
         console.error(err);
       }
     });
   }
+
 }
